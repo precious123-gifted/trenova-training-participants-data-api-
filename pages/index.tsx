@@ -1,9 +1,27 @@
 import Head from "next/head";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
 import nextPackage from "package.json";
 
 export default function Home({}) {
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://trenova-training-participants-data-api-3ccr.vercel.app/api/auth/signup');
+        const data = await response.json();
+        setUsers(data.users);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,15 +31,16 @@ export default function Home({}) {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a> v
-          {nextPackage.version}
-        </h1>
+        
+      {users.map((user) => (
+        <div key={user._id}>
+          {/* Render user details */}
+          <p>{user.participantName}</p>
+          <p>{user.schoolName}</p>
+          {/* Render other user properties */}
+        </div>
+      ))}
 
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
       </main>
     </div>
   );
