@@ -1,27 +1,61 @@
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import axios, { AxiosError } from 'axios'
 import styles from "../styles/Home.module.css";
 import nextPackage from "package.json";
 
 export default function Home({}) {
 
-  const [users, setUsers] = useState([]);
+  const [data, setData] = useState({
+    participantName : "",
+  schoolName : "",
+  address : "",
+  phoneNumber : "",
+  email : "",
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://trenova-training-participants-data-api-3ccr.vercel.app/api/auth/signup');
-        const data = await response.json();
-        setUsers(data.users);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, []);
+})
 
 
+
+
+
+const handleSubmit = async (event) => {
+  event.preventDefault();
+
+  try {
+    const response = await fetch('https://trenova-training-participants-data-api-3ccr.vercel.app/api/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      console.log('Data successfully submitted');
+      // Perform any desired action upon successful submission
+    } else {
+      console.log('Error submitting data');
+      // Handle the error case
+    }
+  } catch (error) {
+    console.log('Error:', error);
+    // Handle any network or other errors
+  }
+};
+
+
+const handleChange = (event) => {
+  const { name, value } = event.target;
+  setData((prevData) => ({
+    ...prevData,
+    [name]: value,
+  }));
+};
+
+
+
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -32,14 +66,61 @@ export default function Home({}) {
 
       <main className={styles.main}>
         
-      {users.map((user) => (
-        <div key={user._id}>
-          {/* Render user details */}
-          <p>{user.participantName}</p>
-          <p>{user.schoolName}</p>
-          {/* Render other user properties */}
-        </div>
-      ))}
+      <form action=""  onSubmit={handleSubmit} >
+
+
+          
+                <div className="content    flex flex-col items-center">
+                               <div className="header mb-[8%] w-full flex justify-center items-center text-center  text-[2.5vw]  portrait:text-[7vw]  portrait:sm:text-[5vw]">
+  <span>MAKE REVIEWS AND DISCOVER COMPANIES</span>
+</div>    
+
+
+
+
+<div className="input-div flex flex-col justify-between items-center w-[70%] portrait:w-[90%]   portrait:sm:w-[90%] portrait:sm:text-[3.5vw] mb-[3vw] portrait:mb-[7vw]">
+<label htmlFor='companyName' className='self-start mb-2'>PARTICIPANT NAME</label>
+<input title='companyName' required type="text"    value={data.participantName}  onChange={handleChange}   name="companyName" id="" className='border-none outline-none rounded h-[3vw] portrait:h-[10vw] w-[100%] px-2 portrait:sm:px-[2vw]'/>
+
+</div>
+
+<div className="input-div flex flex-col justify-between items-center w-[70%] portrait:w-[90%]   portrait:sm:w-[90%] portrait:sm:text-[3.5vw] mb-[3vw] portrait:mb-[7vw]">
+<label htmlFor='firstName'  className='self-start mb-2'>SCHOOL NAME</label>
+<input  title='firstName' required type="text"    onChange={handleChange}  value={data.schoolName}  name="firstName" id="" className='border-none outline-none rounded h-[3vw] portrait:h-[10vw] w-[100%] px-2 portrait:sm:px-[2vw]'/>
+
+</div>
+<div className="input-div flex flex-col justify-between items-center w-[70%] portrait:w-[90%]   portrait:sm:w-[90%] portrait:sm:text-[3.5vw] mb-[3vw] portrait:mb-[7vw]">
+<label htmlFor='lastName' className='self-start mb-2'>ADDRESS</label>
+<input  title='lastName' required type="text"   onChange={handleChange}   value={data.address}   name="lastName" id="" className='border-none outline-none rounded h-[3vw] portrait:h-[10vw] w-[100%] px-2 portrait:sm:px-[2vw]'/>
+
+</div>
+<div className="input-div flex flex-col justify-between items-center w-[70%] portrait:w-[90%]   portrait:sm:w-[90%] portrait:sm:text-[3.5vw] mb-[3vw] portrait:mb-[7vw]">
+<label className='self-start mb-2'>PHONE NUMBER</label>
+<input title='jobTitle' required type="text"  onChange={handleChange}   value={data.phoneNumber}  name="jobTitle" id="" className='border-none outline-none rounded h-[3vw] portrait:h-[10vw] w-[100%] px-2 portrait:sm:px-[2vw]'/>
+
+</div>
+
+
+
+<div className="input-div flex flex-col justify-between items-center w-[70%] portrait:w-[90%]   portrait:sm:w-[90%] portrait:sm:text-[3.5vw] mb-[3vw] portrait:mb-[7vw]">
+<label htmlFor='email' className='self-start mb-2'>EMAIL</label>
+<input title='email' required  type="email"  onChange={handleChange}  value={data.email}  name="email" id="" className='border-none outline-none rounded h-[3vw] portrait:h-[10vw] w-[100%] px-2 portrait:sm:px-[2vw]'/>
+
+</div>
+
+
+<button  title={"Sign up"} type="submit"  className='w-full'>
+<div className="w-full  BTN text-[1.5vw] portrait:text-[4.4vw]  portrait:sm:text-[4vw] flex justify-center items-center mb-4">
+     <span className='w-[60%] h-[4vw]   portrait:h-[10vw] portrait:w-[70%] portrait:sm:w-[60%]  transition-all ease-in duration-[0.5s] bg-lightgreen hover:bg-blue hover:text-armygreen   px-[2vw] py-[0.5vw] text-grey rounded cursor-pointer flex justify-center items-center'> <span>REGISTER USER</span> </span>
+</div>
+</button>
+
+
+
+
+
+                </div>
+                </form>
 
       </main>
     </div>

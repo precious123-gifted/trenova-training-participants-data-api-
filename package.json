@@ -2,6 +2,7 @@
   "name": "market-place-api",
   "version": "0.0.139",
   "dependencies": {
+    "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "moment-timezone": "^0.5.43",
