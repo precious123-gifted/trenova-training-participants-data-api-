@@ -58,7 +58,7 @@ const handler = async (req, res) => {
 
           return res
             .status(201)
-            .setHeader("Access-Control-Allow-Origin", "https://trenova-training-participants-data-api-3ccr.vercel.app/")
+            .setHeader("Access-Control-Allow-Origin", "https://precious123-gifted.github.io/trenova-training-participant-signup")
             .setHeader("Access-Control-Allow-Credentials", "true")
             .json({ success: true, user: savedUser });
         })
@@ -66,12 +66,12 @@ const handler = async (req, res) => {
           console.error(error);
           res
             .status(500)
-            .setHeader("Access-Control-Allow-Origin", "https://trenova-training-participants-data-api-3ccr.vercel.app/")
+            .setHeader("Access-Control-Allow-Origin", "https://precious123-gifted.github.io/trenova-training-participant-signup")
             .setHeader("Access-Control-Allow-Credentials", "true")
             .json({ error: "Internal Server Error" });
         });
     } else if (req.method === "OPTIONS") {
-      res.setHeader("Access-Control-Allow-Origin", "https://trenova-training-participants-data-api-3ccr.vercel.app/");
+      res.setHeader("Access-Control-Allow-Origin", "https://precious123-gifted.github.io/trenova-training-participant-signup");
       res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
       res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Authorization");
       res.setHeader("Access-Control-Allow-Credentials", "true");
@@ -79,7 +79,7 @@ const handler = async (req, res) => {
     } else {
       res
         .status(405)
-        .setHeader("Access-Control-Allow-Origin", "https://trenova-training-participants-data-api-3ccr.vercel.app/")
+        .setHeader("Access-Control-Allow-Origin", "https://precious123-gifted.github.io/trenova-training-participant-signup")
         .setHeader("Access-Control-Allow-Credentials", "true")
         .json({ error: "Method Not Allowed, try using a different method" });
     }
@@ -87,7 +87,7 @@ const handler = async (req, res) => {
     console.error(error);
     res
       .status(500)
-      .setHeader("Access-Control-Allow-Origin", "https://trenova-training-participants-data-api-3ccr.vercel.app/")
+      .setHeader("Access-Control-Allow-Origin", "https://precious123-gifted.github.io/trenova-training-participant-signup")
       .setHeader("Access-Control-Allow-Credentials", "true")
       .json({ error: "Internal Server Error" });
   }
