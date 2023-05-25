@@ -81,6 +81,7 @@ const handler = async (req, res) => {
         .status(405)
         .setHeader("Access-Control-Allow-Origin", "https://precious123-gifted.github.io")
         .setHeader("Access-Control-Allow-Credentials", "true")
+        .setHeader("Allow", "GET, POST, OPTIONS")
         .json({ error: "Method Not Allowed, try using a different method" });
     }
   } catch (error) {
@@ -94,6 +95,7 @@ const handler = async (req, res) => {
 };
 
 export default handler;
+
 
 
 
