@@ -24,7 +24,7 @@ const handler = async (req, res) => {
         createdDate: user.createdDate,
       }));
 
-      return res
+      res
         .status(200)
         .setHeader("Access-Control-Allow-Origin", "https://precious123-gifted.github.io")
         .setHeader("Access-Control-Allow-Credentials", "true")
@@ -56,8 +56,9 @@ const handler = async (req, res) => {
             createdDate: data.createdDate,
           };
 
-          return res
+          res
             .status(201)
+            .setHeader("Access-Control-Allow-Origin", "https://precious123-gifted.github.io")
             .setHeader("Access-Control-Allow-Credentials", "true")
             .json({ success: true, user: savedUser });
         })
@@ -71,8 +72,8 @@ const handler = async (req, res) => {
         });
     } else if (req.method === "OPTIONS") {
       res.setHeader("Access-Control-Allow-Origin", "https://precious123-gifted.github.io");
-      res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-      res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Authorization");
+      res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+      res.setHeader("Access-Control-Allow-Headers", "Content-Type");
       res.setHeader("Access-Control-Allow-Credentials", "true");
       res.status(200).end();
     } else {
@@ -91,8 +92,6 @@ const handler = async (req, res) => {
       .json({ error: "Internal Server Error" });
   }
 };
-
-
 
 export default handler;
 
