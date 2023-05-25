@@ -4,6 +4,7 @@ import axios, { AxiosError } from 'axios'
 import styles from "../styles/Home.module.css";
 import nextPackage from "package.json";
 
+
 export default function Home({}) {
 
   const [data, setData] = useState({
@@ -18,42 +19,45 @@ export default function Home({}) {
 
 
 
-
-const handleSubmit = async (event) => {
-  event.preventDefault();
-
-  try {
-    const response = await fetch('https://trenova-training-participants-data-api-3ccr.vercel.app/api/auth/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      console.log('Data successfully submitted');
-      // Perform any desired action upon successful submission
-    } else {
-      console.log('Error submitting data');
-      // Handle the error case
-    }
-  } catch (error) {
-    console.log('Error:', error);
-    // Handle any network or other errors
-  }
-};
+// const handleSignup = async (event: React.FormEvent<HTMLFormElement>) => {
+//   event.preventDefault()
 
 
-const handleChange = (event) => {
-  const { name, value } = event.target;
-  setData((prevData) => ({
-    ...prevData,
-    [name]: value,
-  }));
-};
+//       try {
+
+//           const axiosInstance = axios.create({
+//             baseURL: 'https://trenova-training-participants-data-api-3ccr.vercel.app/',
+//             withCredentials: true,
+//           });
+
+//           const apiRes = await axiosInstance.post('/api/auth/signup', data);
+
+//           if (apiRes?.data?.success) {
+            
+
+//               alert('data was sent')
+
+//           }
+//       } catch (error: unknown) {
+//           if (error instanceof AxiosError) {
+//               const errorMsg = error.response?.data?.error
+          
+//               console.log(error.response?.data?.error)
+//           }
+//       }
+
+     
+  
+// }
 
 
+
+
+
+// const handleInputChange = (event: React.ChangeEvent<HTMLInputElement   | HTMLSelectElement>) => {
+
+//   setData({ ...data, [event.target.name]: event.target.value })
+// }
 
   
   return (
@@ -66,7 +70,7 @@ const handleChange = (event) => {
 
       <main className={styles.main}>
         
-      <form action=""  onSubmit={handleSubmit} >
+      <form action=""   >
 
 
           
@@ -80,23 +84,23 @@ const handleChange = (event) => {
 
 <div className="input-div flex flex-col justify-between items-center w-[70%] portrait:w-[90%]   portrait:sm:w-[90%] portrait:sm:text-[3.5vw] mb-[3vw] portrait:mb-[7vw]">
 <label htmlFor='companyName' className='self-start mb-2'>PARTICIPANT NAME</label>
-<input title='companyName' required type="text"    value={data.participantName}  onChange={handleChange}   name="companyName" id="" className='border-none outline-none rounded h-[3vw] portrait:h-[10vw] w-[100%] px-2 portrait:sm:px-[2vw]'/>
+<input title='companyName' required type="text"    value={data.participantName}    name="participantName" id="" className='border-none outline-none rounded h-[3vw] portrait:h-[10vw] w-[100%] px-2 portrait:sm:px-[2vw]'/>
 
 </div>
 
 <div className="input-div flex flex-col justify-between items-center w-[70%] portrait:w-[90%]   portrait:sm:w-[90%] portrait:sm:text-[3.5vw] mb-[3vw] portrait:mb-[7vw]">
 <label htmlFor='firstName'  className='self-start mb-2'>SCHOOL NAME</label>
-<input  title='firstName' required type="text"    onChange={handleChange}  value={data.schoolName}  name="firstName" id="" className='border-none outline-none rounded h-[3vw] portrait:h-[10vw] w-[100%] px-2 portrait:sm:px-[2vw]'/>
+<input  title='firstName' required type="text"     value={data.schoolName}  name="schoolName" id="" className='border-none outline-none rounded h-[3vw] portrait:h-[10vw] w-[100%] px-2 portrait:sm:px-[2vw]'/>
 
 </div>
 <div className="input-div flex flex-col justify-between items-center w-[70%] portrait:w-[90%]   portrait:sm:w-[90%] portrait:sm:text-[3.5vw] mb-[3vw] portrait:mb-[7vw]">
 <label htmlFor='lastName' className='self-start mb-2'>ADDRESS</label>
-<input  title='lastName' required type="text"   onChange={handleChange}   value={data.address}   name="lastName" id="" className='border-none outline-none rounded h-[3vw] portrait:h-[10vw] w-[100%] px-2 portrait:sm:px-[2vw]'/>
+<input  title='lastName' required type="text"     value={data.address}   name="address" id="" className='border-none outline-none rounded h-[3vw] portrait:h-[10vw] w-[100%] px-2 portrait:sm:px-[2vw]'/>
 
 </div>
 <div className="input-div flex flex-col justify-between items-center w-[70%] portrait:w-[90%]   portrait:sm:w-[90%] portrait:sm:text-[3.5vw] mb-[3vw] portrait:mb-[7vw]">
 <label className='self-start mb-2'>PHONE NUMBER</label>
-<input title='jobTitle' required type="text"  onChange={handleChange}   value={data.phoneNumber}  name="jobTitle" id="" className='border-none outline-none rounded h-[3vw] portrait:h-[10vw] w-[100%] px-2 portrait:sm:px-[2vw]'/>
+<input title='jobTitle' required type="text"    value={data.phoneNumber}  name="phoneNumber" id="" className='border-none outline-none rounded h-[3vw] portrait:h-[10vw] w-[100%] px-2 portrait:sm:px-[2vw]'/>
 
 </div>
 
@@ -104,7 +108,7 @@ const handleChange = (event) => {
 
 <div className="input-div flex flex-col justify-between items-center w-[70%] portrait:w-[90%]   portrait:sm:w-[90%] portrait:sm:text-[3.5vw] mb-[3vw] portrait:mb-[7vw]">
 <label htmlFor='email' className='self-start mb-2'>EMAIL</label>
-<input title='email' required  type="email"  onChange={handleChange}  value={data.email}  name="email" id="" className='border-none outline-none rounded h-[3vw] portrait:h-[10vw] w-[100%] px-2 portrait:sm:px-[2vw]'/>
+<input title='email' required  type="email"   value={data.email}  name="email" id="" className='border-none outline-none rounded h-[3vw] portrait:h-[10vw] w-[100%] px-2 portrait:sm:px-[2vw]'/>
 
 </div>
 
