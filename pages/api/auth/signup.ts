@@ -26,7 +26,7 @@ const handler = async (req, res) => {
 
       return res
         .status(200)
-        .setHeader("Access-Control-Allow-Origin", "https://trenova-training-participants-data-api-3ccr.vercel.app/")
+        .setHeader("Access-Control-Allow-Origin", "https://precious123-gifted.github.io/trenova-training-participant-signup")
         .setHeader("Access-Control-Allow-Credentials", "true")
         .json({ success: true, users: userJSON });
     } else if (req.method === "POST") {
@@ -58,7 +58,6 @@ const handler = async (req, res) => {
 
           return res
             .status(201)
-            .setHeader("Access-Control-Allow-Origin", "https://precious123-gifted.github.io/trenova-training-participant-signup")
             .setHeader("Access-Control-Allow-Credentials", "true")
             .json({ success: true, user: savedUser });
         })
@@ -92,6 +91,8 @@ const handler = async (req, res) => {
       .json({ error: "Internal Server Error" });
   }
 };
+
+
 
 export default handler;
 
