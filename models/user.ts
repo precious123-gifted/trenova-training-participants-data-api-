@@ -15,7 +15,7 @@ schoolName :{
     type : String ,
     required : [true , "first name is required"],
     minLength : [1,"full name should be atleast 4 letters long"],
-    maxLength : [30,"full name should be atmost 30 letters long"],
+    maxLength : [50,"full name should be atmost 30 letters long"],
 }
 ,
 
@@ -23,7 +23,7 @@ address :{
     type : String ,
     required : [true , "last name is required"],
     minLength : [1,"full name should be atleast 4 letters long"],
-    maxLength : [30,"full name should be atmost 30 letters long"],
+    maxLength : [100,"full name should be atmost 30 letters long"],
 }
 ,
 
