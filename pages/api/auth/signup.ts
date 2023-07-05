@@ -14,22 +14,50 @@ const handler = async (req, res) => {
 
     if (req.method === "GET") {
       const users = await User.find().exec();
-      const userJSON = users.map((user) => ({
-        participantName: user.participantName,
-        schoolName: user.schoolName,
-        address: user.address,
-        phoneNumber: user.phoneNumber,
-        email: user.email,
-        _id: user._id,
-        createdDate: user.createdDate,
-      }));
-
-      res
-        .status(200)
-        .setHeader("Access-Control-Allow-Origin", "https://precious123-gifted.github.io")
-        .setHeader("Access-Control-Allow-Credentials", "true")
-        .json({ success: true, users: userJSON });
-    } else if (req.method === "POST") {
+      const userJSON = users.map((user) => {
+        const { participantName, schoolName, address, phoneNumber, email, _id, createdDate } = user;
+    
+        let propertyValue;
+    
+        switch (req.path) {
+          case "/participantName":
+            propertyValue = participantName;
+            break;
+          case "/schoolName":
+            propertyValue = schoolName;
+            break;
+          case "/address":
+            propertyValue = address;
+            break;
+          case "/phoneNumber":
+            propertyValue = phoneNumber;
+            break;
+          case "/email":
+            propertyValue = email;
+            break;
+          case "/_id":
+            propertyValue = _id;
+            break;
+          case "/createdDate":
+            propertyValue = createdDate;
+            break;
+          default:
+           
+            return {
+              participantName,
+              schoolName,
+              address,
+              phoneNumber,
+              email,
+              _id,
+              createdDate,
+            };
+        }
+    
+        return { [req.path]: propertyValue };
+      });
+    }
+    else if (req.method === "POST") {
       // Handle the POST request
       if (!req.body) return res.status(400).json({ error: "Data is missing" });
 
