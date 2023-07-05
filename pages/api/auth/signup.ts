@@ -14,15 +14,11 @@ const handler = async (req, res) => {
 
     if (req.method === "GET") {
       const users = await User.find().exec();
-      const userJSON = users.map((user) => ({
-       
-        phoneNumber: user.phoneNumber,
-       
-      }));
+      const userJSON = users.map((user) => user.phoneNumber);
 
       res
         .status(200)
-        .setHeader("Access-Control-Allow-Origin", "https://precious123-gifted.github.io")
+        .setHeader("Access-Control-Allow-Origin", "https:/")
         .setHeader("Access-Control-Allow-Credentials", "true")
         .json({ success: true, users: userJSON });
     } else if (req.method === "POST") {
